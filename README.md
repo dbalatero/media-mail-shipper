@@ -1,7 +1,7 @@
 # media-mail-shipper
 
 This is a script that lets you buy postage labels for USPS Media Mail without
-using stamps.com.
+using stamps.com. I made this to make my Discogs mailings easier.
 
 ## Setup
 
