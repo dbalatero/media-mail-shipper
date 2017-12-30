@@ -22,6 +22,7 @@ def read_value(prompt, default = nil)
   value || default
 end
 
+address = {}
 address[:name] = read_value("Name?")
 address[:street1] = read_value("Street?")
 address[:street2] = read_value("Street 2?")
