@@ -2,6 +2,7 @@
 
 require 'easypost'
 require 'json'
+require 'pry'
 
 EasyPost.api_key = ENV.fetch('EASYPOST_API_KEY')
 
@@ -32,6 +33,8 @@ address[:zip] = read_value("Zip?")
 address[:country] = read_value("Country?", "US")
 address[:phone] = read_value("Phone?")
 
+weight = read_value("Weight (lbs)? ", "1.0")
+
 from_address = EasyPost::Address.create(from_address)
 to_address = EasyPost::Address.create(address)
 
@@ -39,7 +42,7 @@ parcel = EasyPost::Parcel.create(
   width: 12.5,
   length: 12.5,
   height: 0.75,
-  weight: 1
+  weight: weight.to_f
 )
 
 # customs_item = EasyPost::CustomsItem.create(
@@ -78,6 +81,8 @@ media_rate = shipment[:rates].detect do |rate|
 end
 
 abort "No MEDIA MAIL rate" unless media_rate
+
+sleep 1
 
 shipment.buy(rate: media_rate)
 puts "Bought label: #{shipment.postage_label.label_url}"
